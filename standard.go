@@ -2,8 +2,6 @@ package addressline
 
 import (
 	"encoding/json"
-	"io/ioutil"
-	"path/filepath"
 )
 
 func SubdivisionCode(countryCode, name string) string {
@@ -79,12 +77,8 @@ var CountryNameMap map[string]*Country
 
 func init() {
 	var err error
-	iso31661b, err := ioutil.ReadFile(filepath.Join("iso_3166-1.json"))
-	if err != nil {
-		panic(err)
-	}
 	iso31661 := &Iso_3166_1{}
-	err = json.Unmarshal(iso31661b, iso31661)
+	err = json.Unmarshal([]byte(Iso_3166_1b), iso31661)
 	if err != nil {
 		panic(err)
 	}
@@ -99,12 +93,8 @@ func init() {
 		CountryNameMap[country.Name] = country
 	}
 
-	iso31662b, err := ioutil.ReadFile(filepath.Join("iso_3166-2.json"))
-	if err != nil {
-		panic(err)
-	}
 	iso31662 := &Iso_3166_2{}
-	err = json.Unmarshal(iso31662b, iso31662)
+	err = json.Unmarshal([]byte(Iso_3166_2b), iso31662)
 	if err != nil {
 		panic(err)
 	}

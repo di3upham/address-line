@@ -1,3 +1,6 @@
+package addressline
+
+var Iso_3166_2b = `
 {
     "3166-2": [
         {
@@ -5880,7 +5883,7 @@
         },
         {
             "code": "EG-IS",
-            "name": "Al Ismā`īlīyah",
+            "name": "Al Ismā` + "`" + `īlīyah",
             "type": "Governorate"
         },
         {
@@ -5920,7 +5923,7 @@
         },
         {
             "code": "EG-PTS",
-            "name": "Būr Sa`īd",
+            "name": "Būr Sa` + "`" + `īd",
             "type": "Governorate"
         },
         {
@@ -20278,7 +20281,7 @@
         },
         {
             "code": "SA-14",
-            "name": "`Asīr",
+            "name": "` + "`" + `Asīr",
             "type": "Province"
         },
         {
@@ -25748,3 +25751,4 @@
         }
     ]
 }
+`

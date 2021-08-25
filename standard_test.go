@@ -25,4 +25,9 @@ func TestSubdivisionCode(t *testing.T) {
 	if subdivisionCode != "VN-67" {
 		t.Error("SubdivisionCode not working", subdivisionCode)
 	}
+
+	subdivisionCode = SubdivisionCode("SA", "`Asīr")
+	if subdivisionCode != "SA-14" {
+		t.Error("SubdivisionCode not working", subdivisionCode)
+	}
 }
