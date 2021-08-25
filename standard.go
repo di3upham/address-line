@@ -3,6 +3,7 @@ package addressline
 import (
 	"encoding/json"
 	"io/ioutil"
+	"path/filepath"
 )
 
 func SubdivisionCode(countryCode, name string) string {
@@ -78,7 +79,7 @@ var CountryNameMap map[string]*Country
 
 func init() {
 	var err error
-	iso31661b, err := ioutil.ReadFile("iso_3166-1.json")
+	iso31661b, err := ioutil.ReadFile(filepath.Join("iso_3166-1.json"))
 	if err != nil {
 		panic(err)
 	}
@@ -98,7 +99,7 @@ func init() {
 		CountryNameMap[country.Name] = country
 	}
 
-	iso31662b, err := ioutil.ReadFile("iso_3166-2.json")
+	iso31662b, err := ioutil.ReadFile(filepath.Join("iso_3166-2.json"))
 	if err != nil {
 		panic(err)
 	}
