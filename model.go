@@ -6,7 +6,7 @@ type Country struct {
 	Name               string `json:"name"`
 	Numeric            string `json:"numeric"`
 	SubdivisionCodeMap map[string]*Subdivision
-	// SubdivisionNameMap map[string]*Subdivision
+	SubdivisionNameMap map[string][]*Subdivision
 }
 
 type Subdivision struct {
@@ -14,4 +14,5 @@ type Subdivision struct {
 	Code    string `json:"code"`
 	Name    string `json:"name"`
 	Type    string `json:"type"`
+	Parent  string `json:"parent"`
 }

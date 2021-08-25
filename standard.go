@@ -2,9 +2,42 @@ package addressline
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 )
+
+func SubdivisionCode(countryCode, name string) string {
+	if countryCode == "" || name == "" {
+		return ""
+	}
+	country := CountryCodeMap[countryCode]
+	if country == nil || len(country.SubdivisionNameMap[name]) == 0 {
+		return ""
+	}
+	subdivisions := country.SubdivisionNameMap[name]
+	subdivisionsLen := len(subdivisions)
+	if subdivisionsLen == 1 {
+		return subdivisions[0].Code
+	}
+	code := subdivisions[0].Code
+	for i := 1; i < subdivisionsLen; i++ {
+		if subdivisions[i].Parent == "" {
+			code = subdivisions[i].Code
+			break
+		}
+	}
+	return code
+}
+
+func CountryCode(name string) (string, string) {
+	if name == "" {
+		return "", ""
+	}
+	country := CountryNameMap[name]
+	if country == nil {
+		return "", ""
+	}
+	return country.Alpha2, country.Alpha3
+}
 
 func CountryName(code string) string {
 	if code == "" {
@@ -83,12 +116,14 @@ func init() {
 		if country.SubdivisionCodeMap == nil {
 			country.SubdivisionCodeMap = make(map[string]*Subdivision)
 		}
+		if country.SubdivisionNameMap == nil {
+			country.SubdivisionNameMap = make(map[string][]*Subdivision)
+		}
 		if country.SubdivisionCodeMap[subdivision.Code] != nil {
-			fmt.Println(country.SubdivisionCodeMap[subdivision.Code])
-			fmt.Println(subdivision)
 			panic("duplicate subdivision")
 		}
 		country.SubdivisionCodeMap[subdivision.Code] = subdivision
+		country.SubdivisionNameMap[subdivision.Name] = append(country.SubdivisionNameMap[subdivision.Name], subdivision)
 
 		subdivision.Country = country
 	}

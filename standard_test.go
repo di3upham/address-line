@@ -19,3 +19,10 @@ func TestCountryName(t *testing.T) {
 		t.Error("CountryName not working")
 	}
 }
+
+func TestSubdivisionCode(t *testing.T) {
+	subdivisionCode := SubdivisionCode("VN", "Nam Định")
+	if subdivisionCode != "VN-67" {
+		t.Error("SubdivisionCode not working", subdivisionCode)
+	}
+}
